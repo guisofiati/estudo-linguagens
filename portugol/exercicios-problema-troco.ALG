@@ -14,9 +14,9 @@ leia(quantidadeComprada)
 escreva("Dinheiro recebido: ")
 leia(dinheiroRecebido)
 
-troco <- (precoUnitario * quantidadeComprada) - dinheiroRecebido
+troco <- dinheiroRecebido - (precoUnitario * quantidadeComprada)
 
 escreval
-escreval("TROCO = ", Abs(troco):8:2)
+escreval("TROCO = ", troco:8:2)
 
 Fimalgoritmo
