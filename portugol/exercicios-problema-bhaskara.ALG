@@ -17,7 +17,7 @@ delta <- Exp(b, 2) - 4 * a * c
 
 // Foi necessario fazer um else com as expressoes por conta de bug do visualg
 
-se delta < 0.0 entao
+se (delta < 0.0) ou (a = 0) entao
    escreval
    escreval("Esta equacao nao possui raizes reais.")
 senao

@@ -2,7 +2,7 @@ Algoritmo "exercicios-problema-menor-de-tres"
 
 Var
 
-n1, n2, n3 : inteiro
+n1, n2, n3, menor : inteiro
 
 Inicio
 
@@ -16,14 +16,15 @@ leia(n3)
 escreval
 
 se (n1 <= n2) e (n1 <= n3) entao
-   escreval("MENOR = ", n1)
+   menor <- n1
+   escreval("MENOR = ", menor)
 senao
-     se (n2 <= n1) e (n2 <= n3) entao
-        escreval("MENOR = ", n2)
+     se n2 <= n3 entao
+        menor <- n2
+        escreval("MENOR = ", menor)
      senao
-          se (n3 <= n1) e (n3 <= n2) entao
-             escreval("MENOR = ", n3)
-          fimse
+          menor <- n3
+          escreval("MENOR = ", menor)
      fimse
 fimse
 

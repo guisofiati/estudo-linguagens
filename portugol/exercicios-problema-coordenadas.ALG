@@ -24,14 +24,14 @@ senao
                   escreval("Q3")
                senao
                     se (x = 0) e (y = 0) entao
-                       escreval("EIXO")
+                       escreval("ORIGEM")
                     senao
-                         se (x > 0) ou (x < 0) e (y = 0) entao
-                            escreval("EIXO X")
+                         se x = 0 entao
+                            escreval("EIXO Y")
                          senao
-                              se (y > 0) ou (y < 0) e (x = 0) entao
-                                 escreval("EIXO Y")
-                              fimse
+                            se y = 0 entao
+                               escreval("EIXO X")
+                            fimse
                          fimse
                     fimse
                fimse

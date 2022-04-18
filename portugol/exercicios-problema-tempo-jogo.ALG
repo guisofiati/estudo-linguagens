@@ -13,18 +13,12 @@ leia(horaFinal)
 
 escreval
 
-se horaInicial > horaFinal entao
-   duracao <- 24 - horaInicial + horaFinal
-   escreval("O JOGO DUROU ", duracao:2, " HORA(S)")
+se horaInicial < horaFinal entao
+   duracao <- horaFinal - horaInicial
 senao
-     se horaFinal > horaInicial entao
-        duracao <- horaFinal - horaInicial
-        escreval("O JOGO DUROU ", duracao:2, " HORA(S)")
-     senao
-          se horaFinal = horaInicial entao
-             escreval("O JOGO DUROU 24 HORA(S)")
-          fimse
-     fimse
+    duracao <- 24 - horaInicial + horaFinal
 fimse
+
+escreval("O JOGO DUROU: ", duracao, " HORA(S)")
 
 Fimalgoritmo

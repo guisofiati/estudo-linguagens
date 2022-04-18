@@ -9,38 +9,27 @@ Inicio
 escreva("Digite o salario da pessoa: ")
 leia(salario)
 
+escreval
+
 se salario <= 1000.00 entao
-   porcentagemAumento <- 0.20
-   aumento <- salario * porcentagemAumento
-   novoSalario <- salario + aumento
-   escreval("NOVO SALARIO: R$ ", novoSalario:5:2)
-   escreval("AUMENTO: R$ ", aumento:5:2)
-   escreval("PORCENTAGEM: 20%")
+   porcentagemAumento <- 20
 senao
      se salario <= 3000.00 entao
-        porcentagemAumento <- 0.15
-        aumento <- salario * porcentagemAumento
-        novoSalario <- salario + aumento
-        escreval("NOVO SALARIO: R$ ", novoSalario:5:2)
-        escreval("AUMENTO: R$ ", aumento:5:2)
-        escreval("PORCENTAGEM: 15%")
+        porcentagemAumento <- 15
      senao
           se salario <= 8000.00 entao
-             porcentagemAumento <- 0.10
-             aumento <- salario * porcentagemAumento
-             novoSalario <- salario + aumento
-             escreval("NOVO SALARIO: R$ ", novoSalario:5:2)
-             escreval("AUMENTO: R$ ", aumento:5:2)
-             escreval("PORCENTAGEM: 10%")
+             porcentagemAumento <- 10
           senao
-               porcentagemAumento <- 0.5
-               aumento <- salario * porcentagemAumento
-               novoSalario <- salario + aumento
-               escreval("NOVO SALARIO: R$ ", novoSalario:5:2)
-               escreval("AUMENTO: R$ ", aumento:5:2)
-               escreval("PORCENTAGEM: 5%")
+               porcentagemAumento <- 5
           fimse
      fimse
 fimse
+
+aumento <- salario * porcentagemAumento / 100
+novoSalario <- salario + aumento
+
+escreval("NOVO SALARIO: R$ ", novoSalario:5:2)
+escreval("AUMENTO: R$ ", aumento:5:2)
+escreval("PORCENTAGEM: ", porcentagemAumento, "%")
 
 Fimalgoritmo
