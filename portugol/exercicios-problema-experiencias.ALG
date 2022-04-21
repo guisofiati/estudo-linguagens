@@ -2,7 +2,7 @@ Algoritmo "exercicios-problema-experiencias"
 
 Var
 
-n, i, cobaiasUtilizadas, totalCobaias, ratos, coelhos, sapos : inteiro
+n, i, cobaiasUtilizadas, totalCobaias, totalRatos, totalCoelhos, totalSapos : inteiro
 tipoCobaia : caractere
 percentualCoelho, percentualRato, percentualSapo : real
 
@@ -12,9 +12,9 @@ escreva("Quantos casos de teste serao digitados? ")
 leia(n)
 
 totalCobaias <- 0
-ratos <- 0
-coelhos <- 0
-sapos <- 0
+totalRatos <- 0
+totalCoelhos <- 0
+totalSapos <- 0
 
 para i de 1 ate n faca
    escreva("Quantidade de cobaias: ")
@@ -23,30 +23,30 @@ para i de 1 ate n faca
    leia(tipoCobaia)
    
    escolha tipoCobaia
-   
    caso "r"
-        ratos <- ratos + cobaiasUtilizadas
+        totalRatos <- totalRatos + cobaiasUtilizadas
    caso "c"
-        coelhos <- coelhos + cobaiasUtilizadas
+        totalCoelhos <- totalCoelhos + cobaiasUtilizadas
    caso "s"
-        sapos <- sapos + cobaiasUtilizadas
+        totalSapos <- totalSapos + cobaiasUtilizadas
    outrocaso
         escreval("Tipo invalido. Utilize [R, C ou S]")
    fimescolha
    
    totalCobaias <- totalCobaias + cobaiasUtilizadas
    
-   percentualCoelho <- 100 * coelhos / totalCobaias
-   percentualRato <- 100 * ratos / totalCobaias
-   percentualSapo <- 100 * sapos / totalCobaias
+   percentualCoelho <- 100 * totalCoelhos / totalCobaias
+   percentualRato <- 100 * totalRatos / totalCobaias
+   percentualSapo <- 100 * totalSapos / totalCobaias
+   
 fimpara
 
 escreval
 escreval("RELATORIO FINAL:")
 escreval("TOTAL = ", totalCobaias, " cobaias")
-escreval("TOTAL DE COELHOS: ", coelhos)
-escreval("TOTAL DE RATOS: ", ratos)
-escreval("TOTAL DE SAPOS: ", sapos)
+escreval("TOTAL DE COELHOS: ", totalCoelhos)
+escreval("TOTAL DE RATOS: ", totalRatos)
+escreval("TOTAL DE SAPOS: ", totalSapos)
 escreval("PERCENTUAL DE COELHOS: ", percentualCoelho:3:2)
 escreval("PERCENTUAL DE RATOS: ", percentualRato:3:2)
 escreval("PERCENTUAL DE SAPOS: ", percentualSapo:3:2)

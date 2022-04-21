@@ -20,7 +20,7 @@ para i de 1 ate num faca
    leia(n2)
    leia(n3)
    
-   mediaPonderada <- ((n1 * peso1) + (n2 * peso2) + (n3 * peso3)) / (peso1 + peso2 + peso3)
+   mediaPonderada <- (n1 * peso1 + n2 * peso2 + n3 * peso3) / (peso1 + peso2 + peso3)
    
    escreval("MEDIA = ", mediaPonderada:3:1)
 
