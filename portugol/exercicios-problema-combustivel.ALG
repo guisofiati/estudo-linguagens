@@ -13,7 +13,7 @@ diesel <- 0
 escreva("Informe um codigo (1, 2, 3) ou 4 para parar: ")
 leia(cod)
 
-enquanto (cod > 0) e (cod < 4) faca
+enquanto cod <> 4 faca
    escolha cod
    caso 1
       alcool <- alcool + 1
