@@ -20,6 +20,7 @@ para i de 0 ate n-1 faca
 fimpara
 
 maiorIdade <- idade[0]
+posicao <- 0
 para i de 1 ate n-1 faca
    se idade[i] > maiorIdade entao
       maiorIdade <- idade[i]
