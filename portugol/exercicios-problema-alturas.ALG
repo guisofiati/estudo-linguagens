@@ -23,26 +23,24 @@ para i de 0 ate n-1 faca
    leia(altura[i])
 fimpara
 
-alturaMedia <- 0
-porcentagemMenores <- 0
-contador <- 0
-
 escreval
 
+alturaMedia <- 0
 para i de 0 ate n-1 faca
    alturaMedia <- alturaMedia + altura[i]
-   
+fimpara
+
+alturaMedia <- alturaMedia / n
+escreval("ALTURA MEDIA: ", alturaMedia:1:2)
+
+porcentagemMenores <- 0
+para i de 0 ate n-1 faca
    se idade[i] < 16 entao
       contador <- contador + 1
    fimse
 fimpara
 
-alturaMedia <- alturaMedia / n
-
-escreval("ALTURA MEDIA: ", alturaMedia:1:2)
-
 porcentagemMenores <- 100 * contador / n
-
 escreval("PESSOAS COM MENOS DE 16 ANOS: ", porcentagemMenores:3:1, "%")
    
 para i de 0 ate n-1 faca
