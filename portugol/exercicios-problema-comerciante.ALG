@@ -15,7 +15,7 @@ escreva("Serao digitados dados de quantos produtos? ")
 leia(n)
 
 para i de 0 ate n-1 faca
-   escreval("PRODUTO", i+1)
+   escreval("Produto", i+1, ":")
    escreva("Nome: ")
    leia(nome[i])
    escreva("Preco de compra: ")
@@ -24,18 +24,17 @@ para i de 0 ate n-1 faca
    leia(precoVenda[i])
 fimpara
 
-para i de 0 ate n-1 faca
-   percentualLucro[i] <- (precoVenda[i] - precoCompra[i]) * 100 / precoCompra[i]
-fimpara
-
 contadorMenorDez <- 0
 contadorEntreDezVinte <- 0
 contadorAcimaVinte <- 0
+
 para i de 0 ate n-1 faca
+   percentualLucro[i] <- (precoVenda[i] - precoCompra[i]) * 100 / precoCompra[i]
+
    se percentualLucro[i] < 10.0 entao
       contadorMenorDez <- contadorMenorDez + 1
    senao
-        se (percentualLucro[i] >= 10.0) e (percentualLucro[i] <= 20.0) entao
+        se percentualLucro[i] <= 20.0 entao
            contadorEntreDezVinte <- contadorEntreDezVinte + 1
         senao
             contadorAcimaVinte <- contadorAcimaVinte + 1
