@@ -39,14 +39,16 @@ para i de 0 ate n-1 faca
    se genero[i] = "F" entao
       somaAlturasFemininas <- somaAlturasFemininas + altura[i]
       contadorFeminino <- contadorFeminino + 1
-   senao
-      se genero[i] = "M" entao
-         contadorMasculino <- contadorMasculino + 1
-      fimse
    fimse
 fimpara
 
-mediaAlturaMulheres <- somaAlturasFemininas / contadorFeminino
+contadorMasculino <- n - contadorFeminino
+
+se contadorFeminino = 0 entao
+   escreval("Impossivel calcular a altura media das mulheres")
+senao
+   mediaAlturaMulheres <- somaAlturasFemininas / contadorFeminino
+fimse
 
 escreval
 escreval("MENOR ALTURA = ", menorAltura:1:2)
