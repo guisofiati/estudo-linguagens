@@ -4,7 +4,6 @@ Var
 
 n, i, j, linhaEscolhida, colunaEscolhida : inteiro
 mat : vetor [0..9, 0..9] de real
-matAlterada : vetor [0..9, 0..9] de real
 soma : real
 
 Inicio
@@ -29,18 +28,15 @@ para i de 0 ate n-1 faca
 fimpara
 
 escreval
-escreva("SOMA DOS POSITIVOS: ", soma:5:1)
+escreval("SOMA DOS POSITIVOS: ", soma:5:1)
 
-escreval
 escreval
 escreva("Escolha uma linha: ")
 leia(linhaEscolhida)
 escreva("LINHA ESCOLHIDA: ")
 
-para i de linhaEscolhida ate linhaEscolhida faca
-   para j de 0 ate n-1 faca
-      escreva(mat[linhaEscolhida, j]:3:1, " ")
-   fimpara
+para i de 0 ate n-1 faca
+   escreva(mat[linhaEscolhida, i]:3:1, " ")
 fimpara
 
 escreval
@@ -49,10 +45,8 @@ escreva("Escolha uma coluna: ")
 leia(colunaEscolhida)
 escreva("COLUNA ESCOLHIDA: ")
 
-para i de 0 ate n-1 faca
-   para j de colunaEscolhida ate colunaEscolhida faca
-      escreva(mat[i, colunaEscolhida]:3:1, " ")
-   fimpara
+para j de 0 ate n-1 faca
+   escreva(mat[j, colunaEscolhida]:3:1, " ")
 fimpara
 
 escreval
@@ -69,13 +63,15 @@ escreval("MATRIZ ALTERADA:")
 
 para i de 0 ate n-1 faca
    para j de 0 ate n-1 faca
-      se mat[i,j] > 0 entao
-         matAlterada[i,j] <- mat[i,j]
-         escreva(matAlterada[i,j]:3:1, " ")
-      senao
-         matAlterada[i,j] <- Exp(mat[i,j], 2)
-         escreva(matAlterada[i,j]:3:1, " ")
+      se mat[i,j] < 0 entao
+         mat[i,j] <- Exp(mat[i,j], 2)
       fimse
+   fimpara
+fimpara
+
+para i de 0 ate n-1 faca
+   para j de 0 ate n-1 faca
+      escreva(mat[i,j]:3:1, " ")
    fimpara
    escreval
 fimpara
