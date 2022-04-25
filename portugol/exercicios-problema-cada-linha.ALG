@@ -21,8 +21,8 @@ escreval
 escreval("MAIOR ELEMENTO DE CADA LINHA:")
 
 para i de 0 ate n-1 faca
-   maior <- 0
-   para j de 0 ate n-1 faca
+   maior <- mat[i,0]
+   para j de 1 ate n-1 faca
       se mat[i,j] >= maior entao
          maior <- mat[i,j]
       fimse
