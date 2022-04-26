@@ -1,0 +1,10 @@
+# c and cpp
+*.o
+*.exe
+
+# ignore code blocks project's extension and folders 
+*.cbp
+*.layout
+*.depend
+/bin/
+/obj/
