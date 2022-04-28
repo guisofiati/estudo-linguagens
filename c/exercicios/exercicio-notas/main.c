@@ -14,11 +14,9 @@ int main() {
 
     printf("\n**********\n");
 
-    if (media >= 60.00) {
-        printf("NOTA FINAL = %.1lf\n", media);
-    }
-    else {
-        printf("NOTA FINAL = %.1lf\n", media);
+    printf("NOTA FINAL = %.1lf\n", media);
+
+    if (media < 60.00) {
         printf("REPROVADO\n");
     }
 
