@@ -7,8 +7,7 @@ int main() {
     int n1, n2;
 
     cout << "Digite dois numeros:" << endl;
-    cin >> n1;
-    cin >> n2;
+    cin >> n1 >> n2;
 
     while (n1 != n2) {
 
@@ -20,8 +19,7 @@ int main() {
         }
 
         cout << "Digite outros dois numeros:" << endl;
-        cin >> n1;
-        cin >> n2;
+        cin >> n1 >> n2;
     }
 
     return 0;
