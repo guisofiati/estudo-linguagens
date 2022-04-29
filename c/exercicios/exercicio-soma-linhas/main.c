@@ -4,7 +4,6 @@
 int main() {
 
     int M, N;
-    double vet[10], soma;
 
     printf("Qual a quantidade de linhas da matriz? ");
     scanf("%d", &M);
@@ -12,6 +11,7 @@ int main() {
     scanf("%d", &N);
 
     double mat[M][N];
+    double vet[M];
 
     for (int i = 0; i < M; i++) {
         printf("\nDigite os elementos da %d linha:\n", i+1);
@@ -21,11 +21,10 @@ int main() {
     }
 
     for (int i = 0; i < M; i++) {
-        soma = 0.0;
+        vet[i] = 0.0;
         for (int j = 0; j < N; j++) {
-            soma = soma + mat[i][j];
+            vet[i] = vet[i] + mat[i][j];
         }
-        vet[i] = soma;
     }
 
     printf("\nVETOR GERADO:\n");

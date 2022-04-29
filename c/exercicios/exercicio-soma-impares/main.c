@@ -6,8 +6,7 @@ int main() {
     int x, y, soma, temp;
 
     printf("Digite dois numeros:\n");
-    scanf("%d", &x);
-    scanf("%d", &y);
+    scanf("%d %d", &x, &y);
 
     if (x > y) {
         temp = y;

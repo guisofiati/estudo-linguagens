@@ -3,7 +3,7 @@
 
 int main() {
 
-    int N, contador;
+    int N;
     double soma, media;
 
     printf("Quantos numeros voce vai digitar? ");
@@ -11,13 +11,11 @@ int main() {
 
     double vet[N];
 
-    contador = 0;
     soma = 0.0;
 
     for (int i = 0; i < N; i++) {
         printf("Digite um numero: ");
         scanf("%lf", &vet[i]);
-        contador++;
         soma = soma + vet[i];
     }
 
@@ -30,7 +28,7 @@ int main() {
 
     printf("\nSOMA = %.2lf\n", soma);
 
-    media = soma / contador;
+    media = soma / N;
 
     printf("MEDIA = %.2lf\n", media);
 
