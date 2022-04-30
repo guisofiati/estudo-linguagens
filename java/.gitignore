@@ -3,6 +3,6 @@
 
 # ignoring java files and folders
 bin/
-.settings/
-.project
 .classpath
+.project
+.settings/
