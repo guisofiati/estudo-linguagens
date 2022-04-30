@@ -2,7 +2,7 @@
 /.metadata/
 
 # ignoring java files and folders
-/bin/
-/.settings/
+bin/
+.settings/
 .project
 .classpath
