@@ -1,0 +1,8 @@
+# ignoring eclipse folder
+/.metadata/
+
+# ignoring java files and folders
+bin/
+.classpath
+.project
+.settings/
