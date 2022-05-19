@@ -10,7 +10,7 @@ import entities.Employee;
 public class Main {
 
 	public static void main(String[] args) {
-		
+
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
@@ -18,15 +18,14 @@ public class Main {
 		
 		System.out.print("How many employees will be registered? ");
 		int N = sc.nextInt();
-		
 		System.out.println();
 		
 		for (int i=1; i<=N; i++) {
-			System.out.println("Employee #" + i + ":");
+			System.out.println("Employee #" + i);
 			System.out.print("Id: ");
 			int id = sc.nextInt();
 			
-			while (hasId(employees, id)) {
+			while (idExists(employees, id)) {
 				System.out.print("Id already exists. Try again: ");
 				id = sc.nextInt();
 			}
@@ -36,24 +35,26 @@ public class Main {
 			String name = sc.nextLine();
 			System.out.print("Salary: ");
 			double salary = sc.nextDouble();
+			System.out.println();
 			
 			employees.add(new Employee(id, name, salary));
-			System.out.println();
 		}
 		
 		System.out.print("Enter the employee id that will have salary increase: ");
-		int employeeId = sc.nextInt();
+		int id = sc.nextInt();
 		
-		Employee emp = employees.stream().filter(x -> x.getId() == employeeId).findFirst().orElse(null);
+		// Pegar APENAS UM id filtrado por:
+		Employee emp = employees.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
 		
-		if (emp == null) {
-			System.out.println("This id does not exists!");
+		if (emp != null) {
+			System.out.print("Enter the percentage: ");
+			double percentage = sc.nextDouble();
+			emp.increaseSalary(percentage);
 		}
 		else {
-			System.out.print("Enter the percentage: ");
-			emp.increaseSalary(sc.nextDouble());
+			System.out.println("This is does not exists!");
 		}
-				
+		
 		System.out.println();
 		System.out.println("List of employees:");
 		for (Employee x : employees) {
@@ -63,7 +64,8 @@ public class Main {
 		sc.close();
 	}
 
-	private static boolean hasId(List<Employee> employees, int id) {
+	// Metodo que retorne um id diferente de null
+	private static boolean idExists(List<Employee> employees, int id) {
 		Employee emp = employees.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
 		return emp != null;
 	}
