@@ -36,7 +36,7 @@ public class Main {
 		OrderStatus orderStatus = OrderStatus.valueOf(sc.nextLine());
 		System.out.println();
 		
-		Order order = new Order(clientBirthDate, orderStatus, new Client(clientName, clientEmail, clientBirthDate));
+		Order order = new Order(new Date(), orderStatus, new Client(clientName, clientEmail, clientBirthDate));
 		
 		System.out.print("How many items to this order? ");
 		int N = sc.nextInt();
@@ -57,7 +57,6 @@ public class Main {
 			order.addItem(item);
 		}
 		
-		System.out.println("ORDER SUMMARY:");
 		System.out.println(order);
 		
 		sc.close();

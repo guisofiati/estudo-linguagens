@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Client {
 	
-	private static SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+	private static final SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
 	
 	private String name;
 	private String email;

@@ -35,7 +35,8 @@ public class OrdemItem {
 	}
 	
 	public String toString() {
-		return product.getName() + ", Quantity: " + quantity + ", Subtotal: " 
+		return product.getName() + ", $" + String.format("%.2f", product.getPrice())
+			    + ", Quantity: " + quantity + ", Subtotal: " 
 				+ String.format("%.2f", subTotal());
 	}
 }
