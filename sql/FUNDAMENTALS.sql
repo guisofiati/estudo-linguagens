@@ -74,3 +74,73 @@ WHERE nome LIKE '%l%'; -- Filtra um filme que tenha a letra 'L' no meio da palav
 
 SELECT * FROM filme
 WHERE nome ILIKE '_her%' AND avaliacao NOT LIKE '3';
+
+-- FUNCOES DE AGREGACAO
+
+-- AVG() - Media
+
+SELECT AVG(avaliacao) FROM filme; -- Media de avaliacao 
+
+SELECT ROUND(AVG(avaliacao), 2) FROM filme; -- Media de avaliacao arredondado com 2 casas decimais
+
+-- COUNT() - Total resultados
+
+SELECT COUNT(nome) FROM filme; -- Total de linhas/resultados
+
+-- MIN() - Menor valor
+
+SELECT MIN(avaliacao) FROM filme;
+
+-- MAX() - Maior valor
+
+SELECT MAX(avaliacao) FROM filme;
+
+SELECT MAX(avaliacao), MIN(avaliacao) FROM filme;
+
+-- SUM() - Soma de uma coluna
+
+SELECT SUM(avaliacao) FROM filme;
+
+-- GROUP BY
+
+SELECT category, SUM(total_value) FROM enterprise
+GROUP BY category
+ORDER BY SUM(total_value); -- Soma o total de ganhos de cada categoria 
+
+SELECT company, divison, SUM(sales)
+FROM finance_table
+WHERE division IN('marketing', 'transport')
+GROUP BY company, division; -- Soma as vendas da compania onde a divisao e marketing e transporte 
+
+SELECT company, SUM(sales)
+FROM finance_table
+GROUP BY company
+ORDER BY SUM(sales) -- Soma as vendas da compania, ordenados pelas vendas
+
+SELECT customer_id, COUNT(amount) FROM payment
+GROUP BY customer_id
+ORDER BY COUNT(amount) DESC; -- Conta quantas transacoes cada customer fez e ordena o maior
+
+SELECT customer_id, staff_id, SUM(amount) FROM payment
+GROUP BY staff_id, customer_id
+ORDER BY staff_id, customer_id; -- Soma o valor que cada customer realizou com o staff 1 ou 2
+
+SELECT DATE(payment_date), SUM(amount) FROM payment
+GROUP BY DATE(payment_date)
+ORDER BY SUM(amount) DESC; -- Soma o valor por dia e mostra o dia com a maior venda
+
+-- HAVING
+
+SELECT company, SUM(sales) FROM finance_table
+WHERE company != 'Google'
+GROUP BY company
+HAVING SUM(sales) > 1000; -- Filtra empresas com vendas maior que 1000, sem o google.
+
+SELECT customer_id, SUM(amount) FROM payment
+WHERE customer_id NOT IN(87, 44, 22)
+GROUP BY customer_id
+HAVING SUM(amount) > 100; -- Soma o valor que cada customer realizou, maior que 100 e sem os ids: 87, 44 e 22
+
+SELECT store_id, COUNT(customer_id) FROM customer
+GROUP BY store_id
+HAVING COUNT(customer_id) > 300; -- Conta quantas lojas tem mais de 300 customers
