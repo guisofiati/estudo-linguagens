@@ -52,14 +52,11 @@ public class Main {
 				
 				products.add(new UsedProduct(name, price, manufactureDate));
 			}
-			else if (answer == 'i') {
+			else {
 				System.out.print("Customs fee: ");
 				double customsFee = sc.nextDouble();
 				
 				products.add(new ImportedProduct(name, price, customsFee));
-			}
-			else {
-				
 			}
 		}
 		
