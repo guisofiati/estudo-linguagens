@@ -16,20 +16,12 @@ public final class IndividualPerson extends TaxPayers {
 	@Override
 	public double taxToPay() {
 		
-		double totalToPay = 0.0;
-		
 		if (getAnnualIncome() < 20000.00) {
-			totalToPay = getAnnualIncome() * 15.0 / 100.0;
+			return getAnnualIncome() * 0.15 - healthExpenditures * 0.5;
 		}
 		else {
-			totalToPay = getAnnualIncome() * 25.0 / 100.0;
+			return getAnnualIncome() * 0.25 - healthExpenditures * 0.5;
 		}
-		
-		if (healthExpenditures > 0) {
-			totalToPay -= healthExpenditures * 50.0 / 100.0;
-		}
-		
-		return totalToPay;
 	}
 
 	public Double gethealthExpenditures() {

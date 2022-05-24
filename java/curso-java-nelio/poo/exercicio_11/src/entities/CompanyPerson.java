@@ -16,16 +16,12 @@ public final class CompanyPerson extends TaxPayers {
 	@Override
 	public double taxToPay() {
 		
-		double totalToPay = 0.0;
-		
 		if (numberOfEmployees > 10) {
-			totalToPay = getAnnualIncome() * 14.0 / 100.0;
+			return getAnnualIncome() * 0.14;
 		}
 		else {
-			totalToPay = getAnnualIncome() * 16.0 / 100.0;
+			return getAnnualIncome() * 0.16;
 		}
-		
-		return totalToPay;
 	}
 
 	public Integer getNumberOfEmployees() {
