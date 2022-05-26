@@ -144,3 +144,47 @@ HAVING SUM(amount) > 100; -- Soma o valor que cada customer realizou, maior que 
 SELECT store_id, COUNT(customer_id) FROM customer
 GROUP BY store_id
 HAVING COUNT(customer_id) > 300; -- Conta quantas lojas tem mais de 300 customers
+
+-- AS
+
+SELECT avaliacao AS avaliacao_filme FROM filme; -- Renomeia a coluna avaliacao para avaliacao_filme (so no resultado)
+
+-- JOINS 
+
+-- INNER OUTER JOIN // INNER JOIN (semelhancas de duas tabelas)
+
+SELECT * FROM registration
+INNER JOIN logins
+ON reg_id = log_id; -- Pega a coluna reg_id e log_id valores semelhantes
+
+SELECT payment_id, payment.customer_id, first_name FROM payment
+INNER JOIN customer
+ON payment.customer_id = customer.customer_id -- Pega id comum entre o customer id das 2 tabelas
+
+-- FULL OUTER JOIN // FULL JOIN (juntar tudo das duas tabelas)
+
+SELECT * FROM registration
+FULL OUTER JOIN logins
+ON registration.reg_id = logins.log_id
+WHERE reg_id IS null OR log_id is NULL -- Pega tudo que nao tem em ambas tabelas e junta 
+
+-- LEFT OUTER JOIN // LEFT JOIN (tudo o que tem na esquerda que a direita nao tem)
+
+SELECT COUNT(*) FROM film
+LEFT JOIN inventory
+ON film.film_id = inventory.film_id
+WHERE inventory.film_id IS null -- Conta quantos filmes nao ha no inventario
+
+-- RIGHT OUTER JOIN // RIGHT JOIN (tudo o que tem na direita que a esquerda nao tem)
+
+SELECT COUNT(*) FROM film
+RIGHT JOIN inventory
+ON film.film_id = inventory.film_id
+WHERE inventory.film_id IS null -- Conta quantos inventarios nao ha filmes
+
+-- UNION (unir duas tabelas)
+
+SELECT * FROM tabela1
+UNION
+SELECT * FROM tabela2;
+ORDER BY name; -- Junta os dados das 2 tabelas e ordena pelo nome
