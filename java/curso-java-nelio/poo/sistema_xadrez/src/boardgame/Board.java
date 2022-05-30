@@ -11,6 +11,16 @@ public class Board {
 		this.columns = columns;
 		pieces = new Piece[rows][columns];
 	}
+	
+	// retorna uma peca do tabuleiro
+	public Piece pieces(int row, int column) {
+		return pieces[row][column];
+	}
+	
+	// retorna uma posicao da peca do tabuleiro
+	public Piece pieces(Position position) {
+		return pieces[position.getRow()][position.getColumn()];
+	}
 
 	public int getRows() {
 		return rows;
