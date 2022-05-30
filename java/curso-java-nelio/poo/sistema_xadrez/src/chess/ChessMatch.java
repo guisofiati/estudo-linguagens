@@ -22,7 +22,7 @@ public class ChessMatch {
 			for (int j=0; j<board.getColumns(); j++) {
 				// Board so conhece obj do tipo Piece e nao ChessPiece, entao e necessario
 				// um downcasting, ja que e uma estrutura em camadas
-				mat[i][j] = (ChessPiece) board.pieces(i, j);
+				mat[i][j] = (ChessPiece) board.piece(i, j);
 			}
 		}
 		
