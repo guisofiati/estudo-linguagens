@@ -188,3 +188,39 @@ SELECT * FROM tabela1
 UNION
 SELECT * FROM tabela2;
 ORDER BY name; -- Junta os dados das 2 tabelas e ordena pelo nome
+
+-- COMANDOS AVANCADOS SQL
+
+SHOW ALL -- Ver todos os params
+SHOW TIMEZONE -- Ver o timezone 
+SELECT NOW() -- Ver hora e data atual
+SELECT TIMEOFDAY() -- Ver dia da semana, mes, dia e hora atual
+SELECT CURRENT_TIME -- Ver a hora atual
+SELECT CURRENT_DATE -- Ver a data atual
+
+SELECT EXTRACT(YEAR FROM payment_date) as payment_year
+FROM payment; -- Mostra apenas o ano dos pagamentos
+
+SELECT EXTRACT(MONTH FROM payment_date) as payment_month
+FROM payment; -- Mostra apenas o mes dos pagamentos
+
+SELECT AGE(payment_date) FROM payment; -- Mostra a idade dos pagamentos
+
+-- Formata para a string informado
+SELECT TO_CHAR(payment_date, 'dd/mm/yyyy');
+SELECT TO_CHAR(payment_date, 'MONTH-yyyy'); 
+SELECT TO_CHAR(payment_date, 'mon/dd/YYYY'); 
+
+-- Operadores e funcoes matematicas (ver mais nas docs)
+
+SELECT ROUND(rental_rate / replacement_cost, 2) * 100 AS percentage FROM film;
+
+-- Operadores e funcoes para String (ver mais nas docs)
+
+SELECT LENGTH(first_name) AS length_name FROM customer;
+SELECT first_name || ' ' || last_name AS full_name FROM customer; --concatenar o nome e sobrenome
+SELECT UPPER(first_name || ' ' || last_name) AS full_name FROM customer;
+SELECT LOWER(first_name || ' ' || last_name) AS full_name FROM customer;
+
+-- pega primeira letra do nome, concatena com o segundo nome e com o '@gmail.com' em minusculo.
+SELECT LOWER(LEFT(first_name, 1) || last_name) || '@gmail.com' AS customer_email FROM customer;
