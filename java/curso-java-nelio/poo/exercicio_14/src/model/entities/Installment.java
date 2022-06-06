@@ -20,7 +20,7 @@ public class Installment {
 	
 	@Override
 	public String toString() {
-		return formater.format(dueDate) + " - " + amount;
+		return formater.format(dueDate) + " - " + String.format("%.2f", amount);
 	}
 
 	public Date getDueDate() {

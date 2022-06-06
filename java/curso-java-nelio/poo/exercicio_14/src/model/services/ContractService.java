@@ -26,11 +26,11 @@ public class ContractService {
 			cal.add(Calendar.MONTH, 1);
 			Date dateInstallement = cal.getTime();
 			
-			double partialTotal = contract.getTotalValue() / months;
-			double totalWithTax = paymentService.interest(partialTotal, i);
-			double total = paymentService.paymentFee(totalWithTax);
+			double basicQuota = contract.getTotalValue() / months;
+			double quotaWithTax = paymentService.interest(basicQuota, i);
+			double fullQuota= paymentService.paymentFee(quotaWithTax);
 			
-			contract.getInstallments().add(new Installment(dateInstallement, total));
+			contract.addInstallment(new Installment(dateInstallement, fullQuota));
 		}
 	}
 }

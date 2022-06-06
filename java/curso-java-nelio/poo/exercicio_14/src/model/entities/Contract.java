@@ -20,6 +20,14 @@ public class Contract {
 		this.date = date;
 		this.totalValue = totalValue;
 	}
+	
+	public void addInstallment(Installment installment) {
+		installments.add(installment);
+	}
+	
+	public void removeInstallment(Installment installment) {
+		installments.remove(installment);
+	}
 
 	public Integer getNumber() {
 		return number;
