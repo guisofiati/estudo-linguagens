@@ -222,5 +222,44 @@ SELECT first_name || ' ' || last_name AS full_name FROM customer; --concatenar o
 SELECT UPPER(first_name || ' ' || last_name) AS full_name FROM customer;
 SELECT LOWER(first_name || ' ' || last_name) AS full_name FROM customer;
 
--- pega primeira letra do nome, concatena com o segundo nome e com o '@gmail.com' em minusculo.
+-- Pega primeira letra do nome, concatena com o segundo nome e com o '@gmail.com' em minusculo.
 SELECT LOWER(LEFT(first_name, 1) || last_name) || '@gmail.com' AS customer_email FROM customer;
+
+-- SubQuery -> usar o resultado de uma query para formar outra query
+
+SELECT title, rental_rate FROM film
+WHERE rental_rate > (SELECT AVG(rental_rate) FROM film); -- Mostra quais filmes tem a avaliacao maior que a media
+
+SELECT student, grade FROM test_scores 
+WHERE student IN 
+(SELECT student FROM honor_roll_table) -- Outra tabela. mostra os alunos que tambem estao na tabela da subquery
+-- *Obs: Se a sub-query retorna varios valores, usar o operador IN
+
+SELECT title, film_id FROM film
+WHERE film_id IN 
+(SELECT inventory.film_id FROM rental
+INNER JOIN inventory ON inventory.film_id = rental.inventory_id
+WHERE return_date BETWEEN '2005-05-29' AND '2005-05-30')
+ORDER BY film_id 
+-- Subquery: Filtrar os filmes que estao entre as datas mencionadas. main query: selecionar o titulo e id dos filmes
+-- que esta no resultado da subquery
+
+SELECT first_name, last_name FROM customer AS c
+WHERE EXISTS
+(SELECT * FROM payment as p
+WHERE p.customer_id = c.customer_id
+AND amount > 11) -- Filtra nome e sobrenome do cliente que teve um pagamento maior que 11
+
+-- SELF JOIN
+-- Para fazer um self join precisa usar o alias AS para nao ficar ambiguo
+
+SELECT emp.name, report.name AS rep
+FROM employees AS emp
+JOIN employees AS report ON
+emp.emp_id = report.report_id -- Mostrar os nomes das pessoas que se reportam aos clientes
+
+SELECT f1.title, f2.title, f1.length
+FROM film as f1
+INNER JOIN film AS f2 ON 
+f1.film_id != f2.film_id
+AND f1.length = f2.length -- Titulos diferentes que compartilha a mesma duracao de filme
