@@ -16,12 +16,9 @@ public class Main {
 		list.add(new Product("Notebook", 1200.0));
 		list.add(new Product("Tablet", 700.0));
 		
-		//classe anonima (n precisa criar uma classe separada, implementando etc..)
-		Comparator<Product> comp = new Comparator<Product>() {
-			@Override
-			public int compare(Product p1, Product p2) {
-				return p1.getName().compareToIgnoreCase(p2.getName());
-			}
+		// expressao lambda, funcao anonima, arrow function
+		Comparator<Product> comp = (p1, p2) -> {
+			return p1.getName().compareToIgnoreCase(p2.getName());
 		};
 		
 		list.sort(comp);
