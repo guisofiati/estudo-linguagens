@@ -17,9 +17,7 @@ public class Main {
 		list.add(new Product("Tablet", 700.0));
 		
 		// expressao lambda, funcao anonima, arrow function
-		Comparator<Product> comp = (p1, p2) -> {
-			return p1.getName().compareToIgnoreCase(p2.getName());
-		};
+		Comparator<Product> comp = (p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName());
 		
 		list.sort(comp);
 		
