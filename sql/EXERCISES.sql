@@ -162,3 +162,31 @@ WHERE EXTRACT(DOW FROM payment_date) = 1;
 
 SELECT COUNT(*) FROM payment
 WHERE TRIM(TO_CHAR(payment_date, 'Day')) = 'Monday';
+
+-- ASSESSMENT TEST 2
+
+-- 1) 
+SELECT * FROM cd.facilities;
+
+-- 2)
+SELECT name, membercost FROM cd.facilities;
+
+-- 3)
+SELECT * FROM cd.facilities
+WHERE membercost > 0;
+
+-- 4)
+SELECT facid, name, membercost, monthlymaintenance FROM cd.facilities
+WHERE membercost > 0 AND (membercost < monthlymaintenance / 50);
+
+-- 5)
+SELECT * FROM cd.facilities
+WHERE name LIKE '%Tennis%';
+
+-- 6)
+SELECT * FROM cd.facilities
+WHERE facid IN(1, 5);
+
+-- 7)
+SELECT memid, surname, firstname, joindate FROM cd.members 
+WHERE joindate > '01/09/2012';
