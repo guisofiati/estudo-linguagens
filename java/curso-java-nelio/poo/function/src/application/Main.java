@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import entities.Product;
-import utils.UpperCaseName;
 
 public class Main {
 
@@ -21,7 +20,7 @@ public class Main {
 		products.add(new Product("HD Case", 80.0));
 		
 		// map tem uma function como parametro
-		List<String> names = products.stream().map(Product::staticUpperCaseName).collect(Collectors.toList());
+		List<String> names = products.stream().map(Product::nonStaticUpperCase).collect(Collectors.toList());
 		
 		names.forEach(System.out::println);
 	}
