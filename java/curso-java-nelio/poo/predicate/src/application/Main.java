@@ -20,7 +20,8 @@ public class Main {
 		products.add(new Product("HD Case", 80.0));
 		
 		// remove se o argumento for true
-		products.removeIf(new ProductPredicate());
+		// usando method reference
+		products.removeIf(Product::staticProductPredicate);
 		
 		for (Product p : products) {
 			System.out.println(p);

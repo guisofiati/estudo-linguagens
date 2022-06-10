@@ -9,6 +9,10 @@ public class Product {
 		this.name = name;
 		this.price = price;
 	}
+	
+	public static boolean staticProductPredicate(Product p) {
+		return p.getPrice() >= 100;
+	}
 
 	public String getName() {
 		return name;
