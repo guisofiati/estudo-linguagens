@@ -9,6 +9,10 @@ public class Product {
 		this.name = name;
 		this.price = price;
 	}
+	
+	public static void staticPriceUdpate(Product p) {
+		p.setPrice(p.getPrice() * 1.1);
+	}
 
 	public String getName() {
 		return name;
