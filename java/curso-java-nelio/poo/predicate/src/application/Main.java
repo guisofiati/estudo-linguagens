@@ -21,7 +21,7 @@ public class Main {
 		
 		// remove se o argumento for true
 		// usando method reference
-		products.removeIf(Product::staticProductPredicate);
+		products.removeIf(Product::nonStaticProductPredicate);
 		
 		for (Product p : products) {
 			System.out.println(p);
