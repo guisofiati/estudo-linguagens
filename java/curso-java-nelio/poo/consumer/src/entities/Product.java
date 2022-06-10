@@ -13,6 +13,10 @@ public class Product {
 	public static void staticPriceUdpate(Product p) {
 		p.setPrice(p.getPrice() * 1.1);
 	}
+	
+	public void nonStaticPriceUpdate() {
+		price *= 1.1;
+	}
 
 	public String getName() {
 		return name;

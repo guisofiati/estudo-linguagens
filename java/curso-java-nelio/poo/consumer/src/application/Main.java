@@ -18,7 +18,7 @@ public class Main {
 		products.add(new Product("Tablet", 350.0));
 		products.add(new Product("HD Case", 80.0));
 		
-		products.forEach(Product::staticPriceUdpate);
+		products.forEach(Product::nonStaticPriceUpdate);
 		
 		products.forEach(System.out::println);
 	}
