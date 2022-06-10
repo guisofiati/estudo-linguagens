@@ -9,6 +9,10 @@ public class Product {
 		this.name = name;
 		this.price = price;
 	}
+	
+	public static String staticUpperCaseName(Product p) {
+		return p.getName().toUpperCase();
+	}
 
 	public String getName() {
 		return name;

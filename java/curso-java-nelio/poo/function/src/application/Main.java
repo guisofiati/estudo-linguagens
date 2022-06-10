@@ -21,7 +21,7 @@ public class Main {
 		products.add(new Product("HD Case", 80.0));
 		
 		// map tem uma function como parametro
-		List<String> names = products.stream().map(new UpperCaseName()).collect(Collectors.toList());
+		List<String> names = products.stream().map(Product::staticUpperCaseName).collect(Collectors.toList());
 		
 		names.forEach(System.out::println);
 	}
