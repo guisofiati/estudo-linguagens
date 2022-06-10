@@ -21,7 +21,7 @@ public class Main {
 		
 		ProductService ps = new ProductService();
 		
-		double totalFiltered = ps.filteredSum(products);
+		double totalFiltered = ps.filteredSum(products, p -> p.getName().charAt(0) == 'T');
 		
 		System.out.println(totalFiltered);
 	}
