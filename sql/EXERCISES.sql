@@ -190,3 +190,15 @@ WHERE facid IN(1, 5);
 -- 7)
 SELECT memid, surname, firstname, joindate FROM cd.members 
 WHERE joindate > '01/09/2012';
+
+-- 8)
+SELECT DISTINCT(surname) FROM cd.members
+ORDER BY surname LIMIT 10;
+
+-- 9)
+SELECT joindate FROM cd.members
+ORDER BY memid DESC LIMIT 1;
+
+-- 10)
+SELECT COUNT(*) FROM cd.facilities
+WHERE guestcost >= 10;
