@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Predicate;
 
 import entities.Product;
 import utils.ProductPredicate;
@@ -19,9 +20,12 @@ public class Main {
 		products.add(new Product("Tablet", 350.0));
 		products.add(new Product("HD Case", 80.0));
 		
+		// expressao lambda declarada
+		Predicate<Product> pred = p -> p.getPrice() >= 100;
+		
 		// remove se o argumento for true
 		// usando method reference
-		products.removeIf(Product::nonStaticProductPredicate);
+		products.removeIf(pred);
 		
 		for (Product p : products) {
 			System.out.println(p);
