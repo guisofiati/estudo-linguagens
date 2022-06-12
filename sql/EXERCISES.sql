@@ -202,3 +202,33 @@ ORDER BY memid DESC LIMIT 1;
 -- 10)
 SELECT COUNT(*) FROM cd.facilities
 WHERE guestcost >= 10;
+
+-- 11)
+SELECT facid, SUM(slots) FROM cd.bookings
+WHERE starttime >= '2012-09-01' AND starttime < '2012-10-01'
+GROUP BY facid 
+ORDER BY SUM(slots);
+
+-- 12)
+SELECT facid, SUM(slots) FROM cd.bookings
+GROUP BY facid 
+HAVING SUM(slots) > 1000
+ORDER BY facid;
+
+-- 13)
+SELECT cd.bookings.starttime AS start, cd.facilities.name AS name
+FROM cd.facilities
+INNER JOIN cd.bookings
+ON cd.facilities.facid = cd.bookings.facid
+WHERE cd.facilities.facid IN(0,1)
+AND cd.bookings.starttime >= '2012-09-21'
+AND cd.bookings.starttime <= '2012-09-22'
+ORDER BY cd.bookings.starttime;
+
+-- 14)
+SELECT cd.bookings.starttime
+FROM cd.bookins 
+INNER JOIN cd.members
+ON cd.members.memid = cd.bookings.memid
+WHERE cd.members.firstname = 'David'
+AND cd.members.surname = 'Farrell';
