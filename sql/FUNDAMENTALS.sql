@@ -263,3 +263,149 @@ FROM film as f1
 INNER JOIN film AS f2 ON 
 f1.film_id != f2.film_id
 AND f1.length = f2.length -- Titulos diferentes que compartilha a mesma duracao de filme
+
+-- CASE
+ 
+SELECT customer_id,
+CASE customer_id
+    WHEN 1 THEN '1st'
+    WHEN 5 THEN '2nd'
+    ELSE 'Lose'
+END AS winners
+FROM customer
+ORDER BY customer_id; -- Atribui ao id 1 e 5 os valores indexados
+
+SELECT customer_id,
+CASE
+    WHEN (customer_id <= 100) THEN 'Premium'
+    WHEN (customer_id BETWEEN 100 AND 200) THEN 'Plus'
+    ELSE 'Normal'
+END AS awarded_customer
+FROM customer;
+
+SELECT -- (rental_rate)
+CASE rental_rate
+	WHEN 0.99 THEN 1
+	ELSE 0
+END 
+FROM film; -- Adicionando aos filmes com 0.99 o valor 1
+
+SELECT 
+SUM(CASE rental_rate
+	WHEN 0.99 THEN 1
+	ELSE 0
+END) AS number_rate_minimum,
+SUM(CASE rental_rate
+	WHEN 2.99 THEN 1
+	ELSE 0
+END) AS number_rate_regular
+FROM film; -- Contando quantos filmes tem avaliacao com 0.99 e 2.99
+
+-- CREATE
+CREATE TABLE tabela (
+    col_1 SERIAL PRIMARY KEY,
+    col_2 VARCHAR(20) UNIQUE NOT NULL
+);
+
+-- INSERT
+INSERT INTO tabela (col_2)
+VALUES ('Biologia');
+
+-- UPDATE VALUE IN COLUMN
+UPDATE Tabela
+SET col_2 = 'Ciencias'
+WHERE col_2 = 'Biologia'
+
+-- DELETE
+DELETE FROM tabela
+WHERE col_2 = 'Ciencias'
+
+-- ALTER (adicionar, excluir, renomear colunas, tabelas e tipos de dados)
+
+-- add
+ALTER TABLE tabela
+ADD COLUMN new_col TYPE
+
+-- remove 
+ALTER TABLE tabela
+DROP COLUMN col_name
+
+-- rename table
+ALTER TABLE tabela
+RENAME TO new_name
+
+-- rename column
+ALTER TABLE tabela
+RENAME COLUMN col_name TO new_col_name
+
+ALTER TABLE tabela
+ALTER COLUMN col
+SET NOT NULL -- add constraint not null p/ coluna
+DROP NOT NULL -- remove contraint
+
+-- DROP (remover tabela/coluna)
+ALTER TABLE tabela
+DROP COLUMN IF EXISTS col
+
+DROP TABLE tabela -- remover tabela
+
+-- CHECK constraint -> cria um 'if' para inserir dados,
+-- so permite inserir se tal condicao CHECK for true
+CREATE TABLE employees (
+	emp_id SERIAL PRIMARY KEY,
+	first_name VARCHAR(50) NOT NULL,
+	last_name VARCHAR(50) NOT NULL,
+	birthdate DATE NOT NULL CHECK (birthdate > '1900-01-01'),
+	hire_date DATE NOT NULL CHECK (hire_date > birthdate),
+	salary DOUBLE PRECISION CHECK (salary > 0.0)
+);
+
+-- CASE 
+SELECT 
+SUM(CASE rating
+	WHEN 'R' THEN 1
+	ELSE 0
+END) AS r,
+SUM(CASE rating
+	WHEN 'PG' THEN 1
+	ELSE 0
+END) AS pg,
+SUM (CASE rating
+	WHEN 'PG-13' THEN 1
+	 ELSE 0
+END) AS pg13
+FROM film;
+
+-- COALESCE 
+-- se o disconto for null e trocado pelo 0
+SELECT item,(price - COALESCE(discount, 0)) AS final FROM tabela 
+
+-- CAST
+SELECT CHAR_LENGTH(CAST(inventory_id AS VARCHAR)) FROM rental;
+
+-- NULLIF -> se for null retorna null
+SELECT (
+SUM(CASE WHEN department = 'A' THEN 1 ELSE 0 END) /
+NULLIF(SUM(CASE WHEN department = 'B' THEN 1 ELSE 0 END),0)
+) AS ratio
+FROM depts;
+
+-- VIEW -> uma query 'compactada' serve para nao ter que ficar repetindo querys grandes
+
+-- criar view
+CREATE VIEW customer_address_info AS 
+SELECT first_name, last_name, address FROM customer
+INNER JOIN address
+ON customer.address_id = address.address_id;
+
+-- acessar
+SELECT * FROM customer_address_info;
+
+-- alterar
+CREATE OR REPLACE VIEW customer_address_info AS query_com_mudança
+
+-- deletar
+DROP VIEW IF EXISTS customer_adress_info;
+
+-- renomear
+ALTER VIEW customer_address_info RENAME TO customer_infos
