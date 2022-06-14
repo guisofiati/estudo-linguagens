@@ -196,8 +196,7 @@ SELECT DISTINCT(surname) FROM cd.members
 ORDER BY surname LIMIT 10;
 
 -- 9)
-SELECT joindate FROM cd.members
-ORDER BY memid DESC LIMIT 1;
+SELECT MAX(joindate) FROM cd.members
 
 -- 10)
 SELECT COUNT(*) FROM cd.facilities
@@ -232,3 +231,13 @@ INNER JOIN cd.members
 ON cd.members.memid = cd.bookings.memid
 WHERE cd.members.firstname = 'David'
 AND cd.members.surname = 'Farrell';
+
+-- Learning table
+
+-- Get username and job's name of the worker
+
+SELECT username AS funcionario, job_name AS trabalho  FROM worker
+INNER JOIN worker_job
+ON worker.user_id = worker_job.user_id
+INNER JOIN job
+ON job.job_id = worker_job.job_id;
