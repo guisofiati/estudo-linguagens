@@ -5,13 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import db.DB;
-import db.DbException;
+import db.DbIntegrityException;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		// atualizar dados do banco
+		// deletar dados do banco
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -20,20 +20,19 @@ public class Main {
 			conn = DB.getConnection();
 			
 			ps = conn.prepareStatement(
-						  "UPDATE seller "
-						+ "SET BaseSalary = BaseSalary + ? "
-						+ "WHERE DepartmentId = ?"
+					"DELETE FROM department "
+					+ "WHERE Id = ?"
 					);
 			
-			ps.setDouble(1, 200.0);
-			ps.setInt(2, 2);
+			ps.setInt(1, 2);
 			
 			int rowsAffected = ps.executeUpdate();
 			
 			System.out.println("Done! Rows affected: " + rowsAffected);
 		}
+		// integridade referencial
 		catch (SQLException e) {
-			throw new DbException(e.getMessage());
+			throw new DbIntegrityException(e.getMessage());
 		}
 		finally {
 			DB.closeStatement(ps);
