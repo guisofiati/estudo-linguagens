@@ -1,9 +1,12 @@
 package application;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import db.DB;
 import db.DbException;
@@ -12,41 +15,57 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		// recupearar dados do banco
+		// inserir dados do banco
 		
+		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
 		Connection conn = null;
 		
-		// recursos nao gerenciados pela jvm pois sao externos, recomendavel fecha-los manualmente
-		// para evitar possiveis vazamentos de memoria
-		Statement st = null;
-		ResultSet rs = null;
+		// preparar para inserir os dados
+		PreparedStatement ps = null;
 		
 		try {
-			// tentar conexao com o banco
 			conn = DB.getConnection();
 			
-			// permitir inserir um comando sql
-			st = conn.createStatement();
+			ps = conn.prepareStatement(
+					"INSERT INTO seller " 
+					+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
+					+ "VALUES (?, ?, ?, ?, ?)", 
+					Statement.RETURN_GENERATED_KEYS // retorna o id da nova linha criada
+					);
 			
-			// resultado armazenado na variavel rs do tipo ResultSet
-			rs = st.executeQuery("SELECT * FROM department");
+			// substituir os place holders por seus valores
+			// 1 arg: index do placeholder, 2 arg: valor
+			ps.setString(1, "Carl purple");
+			ps.setString(2, "carl@gmail.com");
+			ps.setDate(3, new java.sql.Date(formater.parse("22/04/1985").getTime()));
+			ps.setDouble(4, 3000.0);
+			ps.setInt(5, 4);
 			
-			// retorna false se for a ultima linha 
-			while (rs.next()) {
-				// verificar o tipo de dado da coluna e chamar a funcao get
-				System.out.println(rs.getInt("Id") + ", " + rs.getString("Name"));
+			// ver quantas linhas foram atualizadas / inseridas
+			int rowsAffected = ps.executeUpdate();
+			
+			// pode ter mais de um valor, no caso foi inserido apenas 1
+			// mas se for mais imprime todos
+			if (rowsAffected > 0) {
+				ResultSet rs = ps.getGeneratedKeys();
+				while (rs.next()) {
+					// vai ser criada uma tabela auxiliar com apenas 1 coluna com os ids
+					int id = rs.getInt(1);
+					System.out.println("Done! Id = " + id);
+				}
+			}
+			else {
+				System.out.println("No rows affected!");
 			}
 		}
 		catch (SQLException e) {
 			throw new DbException(e.getMessage());
 		}
+		catch (ParseException e) {
+			e.printStackTrace();
+		}
 		finally {
-			// como podem gerar tambem execoes e nao ter que ficar adicionando mais try catch
-			// fica mais viavel criar metodos estaticos na classe DB
-			//rs.close();
-			//st.close();
-			DB.closeStatement(st);
-			DB.closeResultSet(rs);
+			DB.closeStatement(ps);
 			DB.closeConnection();
 		}
 	}
