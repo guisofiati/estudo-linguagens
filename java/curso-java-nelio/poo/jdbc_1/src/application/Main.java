@@ -2,9 +2,7 @@ package application;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import db.DB;
 import db.DbException;
@@ -13,7 +11,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		// inserir dados do banco
+		// atualizar dados do banco
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -21,22 +19,18 @@ public class Main {
 		try {
 			conn = DB.getConnection();
 			
-			String query = "INSERT INTO department (Name) VALUES ('D1'), ('D2')";
+			ps = conn.prepareStatement(
+						  "UPDATE seller "
+						+ "SET BaseSalary = BaseSalary + ? "
+						+ "WHERE DepartmentId = ?"
+					);
 			
-			ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			ps.setDouble(1, 200.0);
+			ps.setInt(2, 2);
 			
 			int rowsAffected = ps.executeUpdate();
 			
-			if (rowsAffected > 0) {
-				ResultSet rs = ps.getGeneratedKeys();
-				while (rs.next()) {
-					int id = rs.getInt(1);
-					System.out.println("Done! Id = " + id);
-				}
-			}
-			else {
-				System.out.println("No rows affected!");
-			}
+			System.out.println("Done! Rows affected: " + rowsAffected);
 		}
 		catch (SQLException e) {
 			throw new DbException(e.getMessage());
