@@ -15,9 +15,9 @@ import model.entities.Seller;
 public class SellerDaoJDBC implements SellerDao {
 
 	private Connection conn;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
 	
-	// injecao de dependencia para nao ter que criar outra
-	// conexao com o banco, criar os objetos do Connection...
 	public SellerDaoJDBC(Connection conn) {
 		this.conn = conn;
 	}
@@ -39,8 +39,6 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public Seller findById(Integer id) {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 		
 		try {
 			ps = conn.prepareStatement(
@@ -56,20 +54,11 @@ public class SellerDaoJDBC implements SellerDao {
 			rs = ps.executeQuery();
 			
 			if (rs.next()) {
-				Department dep = new Department();
-				Seller seller = new Seller();
-				dep.setId(rs.getInt("DepartmentId"));
-				// no caso foi usado um Alias para renomear a tabela, entao deve ser passado ele
-				dep.setName(rs.getString("DepName"));
-				seller.setId(rs.getInt("Id"));
-				seller.setName(rs.getString("Name"));
-				seller.setEmail(rs.getString("Email"));
-				seller.setBaseSalary(rs.getDouble("BaseSalary"));
-				seller.setBirthdate(rs.getDate("BirthDate"));
-				seller.setDepartment(dep);
+				Department dep = instantiateDepartment(rs);
+				Seller seller = instantiateSeller(rs, dep);
 				return seller;
 			}
-			// se nao tiver vendedor com o id informado retorna null
+			
 			return null;
 		}
 		catch (SQLException e) {
@@ -85,5 +74,23 @@ public class SellerDaoJDBC implements SellerDao {
 	public List<Seller> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private Department instantiateDepartment(ResultSet rs) throws SQLException {
+		Department dep = new Department();
+		dep.setId(rs.getInt("DepartmentId"));
+		dep.setName(rs.getString("DepName"));
+		return dep;
+	}
+	
+	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {
+		Seller seller = new Seller();
+		seller.setId(rs.getInt("Id"));
+		seller.setName(rs.getString("Name"));
+		seller.setEmail(rs.getString("Email"));
+		seller.setBaseSalary(rs.getDouble("BaseSalary"));
+		seller.setBirthdate(rs.getDate("BirthDate"));
+		seller.setDepartment(dep);
+		return seller;
 	}
 }
