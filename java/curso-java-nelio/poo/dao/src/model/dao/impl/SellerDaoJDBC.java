@@ -75,7 +75,6 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public List<Seller> findAll() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -117,6 +116,10 @@ public class SellerDaoJDBC implements SellerDao {
 		}
 		catch (SQLException e) {
 			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(ps);
+			DB.closeResultSet(rs);
 		}
 	}
 	
