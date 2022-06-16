@@ -75,7 +75,38 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public List<Seller> findAll() {
-		return null;
+		
+		try {
+			ps = conn.prepareStatement(
+					"SELECT seller.*, department.Name as DepName "
+					+ "FROM seller "
+					+ "INNER JOIN department "
+					+ "ON seller.DepartmentId = department.Id "
+					+ "ORDER BY seller.Name"
+					);
+			
+			rs = ps.executeQuery();
+			
+			List<Seller> listResult = new ArrayList<>();
+			
+			Map<Integer, Department> map = new HashMap<>();
+			
+			while (rs.next()) {
+				Department dep = map.get(rs.getInt("DepartmentId"));
+				
+				if (dep == null) {
+					dep = instantiateDepartment(rs);
+					map.put(rs.getInt("DepartmentId"), dep);
+				}
+				
+				Seller seller = instantiateSeller(rs, dep);
+				listResult.add(seller);
+			}
+			return listResult;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
 	}
 
 	@Override
@@ -100,10 +131,8 @@ public class SellerDaoJDBC implements SellerDao {
 			Map<Integer, Department> map = new HashMap<>();
 			
 			while (rs.next()) {
-				// verificando se o departamento id passado ja existe
 				Department dep = map.get(rs.getInt("DepartmentId"));
 				
-				// se verificado no map e ver que nao existe, entao e instanciado
 				if (dep == null) {
 					dep = instantiateDepartment(rs);
 					map.put(rs.getInt("DepartmentId"), dep);
